@@ -1,4 +1,4 @@
-package pkgGame;
+package pkgGame; 
 
 import pkgEnum.ePuzzleViolation;
 import pkgHelper.LatinSquare;
