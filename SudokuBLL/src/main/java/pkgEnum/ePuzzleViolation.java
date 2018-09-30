@@ -1,4 +1,4 @@
-package pkgEnum;
+package pkgEnum; //Enum
 
 public enum ePuzzleViolation {
 
