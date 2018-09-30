@@ -8,7 +8,7 @@ import pkgHelper.PuzzleViolation;
  * Sudoku - This class extends LatinSquare, adding methods, constructor to
  * handle Sudoku logic
  * 
- * @version 1.2
+ * @version 1.2 
  * @since Lab #2
  * @author Bert.Gibbons
  *
