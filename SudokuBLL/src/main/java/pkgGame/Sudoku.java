@@ -1,4 +1,4 @@
-package pkgGame; // new Sudoku update 
+package pkgGame; // new Sudoku update
 
 import pkgEnum.ePuzzleViolation;
 import pkgHelper.LatinSquare;
