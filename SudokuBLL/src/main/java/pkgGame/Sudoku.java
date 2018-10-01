@@ -1,8 +1,14 @@
 package pkgGame; // new Sudoku update  
 
 import pkgEnum.ePuzzleViolation;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.security.SecureRandom;
+
 import pkgHelper.LatinSquare;
 import pkgHelper.PuzzleViolation;
+
 
 /**
  * Sudoku - This class extends LatinSquare, adding methods, constructor to
@@ -271,4 +277,99 @@ public class Sudoku extends LatinSquare {
 		
 		return true;
 	}
+	
+	public void SetRegion(int r) {
+		//Creates an int array to hold all posible values
+		int[] reg = new int[super.getLatinSquare().length];
+		//Creates a two-dim int array to hold the puzzle
+		int[][] puzzleHolder = super.getLatinSquare();
+		//Fills reg with all values of this puzzle
+		for (int regInt = 1; regInt < iSize + 1; regInt++) {
+			reg[regInt-1] = regInt;
+		}
+		// Sets up index for region
+		int i = (r / iSqrtSize) * iSqrtSize;
+		int j = (r % iSqrtSize) * iSqrtSize;
+		int jMax = j + iSqrtSize;
+		int iMax = i + iSqrtSize;
+		int iCnt = 0;
+		
+		//places each value of reg individually into "r" region of holder
+		for (; i < iMax; i++) {
+			for (j = (r % iSqrtSize) * iSqrtSize; j < jMax; j++) {
+				puzzleHolder[i][j]=reg[iCnt++];
+			}
+		}
+		//replaces LatinSquare's puzzle with holder
+		super.setLatinSquare(puzzleHolder);
+		
+	}
+	
+	public void ShuffleRegion(int r) {
+		// creates 1-dim int array to hold region to shuffle
+		int[] reg = this.getRegion(r);
+		// Uses method "getPuzzle()" to hold the puzzle
+		int[][] puzzleHolder = super.getLatinSquare();
+		// Uses method "shuffleArray()" to shuffle our array
+		ShuffleArray(reg);
+		// Sets up index for region
+		int i = (r / iSqrtSize) * iSqrtSize;
+		int j = (r % iSqrtSize) * iSqrtSize;
+		int jMax = j + iSqrtSize;
+		int iMax = i + iSqrtSize;
+		int iCnt = 0;
+		
+		//places each value of reg individually into "r" region of holder
+		for (; i < iMax; i++) {
+			for (j = (r % iSqrtSize) * iSqrtSize; j < jMax; j++) {
+				puzzleHolder[i][j]=reg[iCnt++];
+			}
+		}
+		//replaces LatinSquare's puzzle with holder
+		super.setLatinSquare(puzzleHolder);
+		
+		
+	}
+
+	public static void ShuffleArray(int[] arr) {
+		//creating a Secure Random Instance
+		SecureRandom rnd = new SecureRandom();
+		//Using the Secure Random to shuffle all elements of the array for the lenght of the array
+		for (int i=0; i<arr.length; i++) {
+			//Secure Randoms nextInt picks
+			int randIndex = rnd.nextInt(arr.length);
+			int hold = arr[i];
+			arr[i] = arr[randIndex];
+			arr[randIndex] = hold;
+			
+			
+		}
+		
+		
+	}
+	public void PrintPuzzle() {
+		for (int i = 0; i < iSize; i++) {
+			for (int j = 0; j < iSize; j++) {
+				System.out.print(getPuzzle()[i][j] + " ");
+			}
+			System.out.print("\n");
+		}
+
+	}
+	
+	public int getRegionNbr(int iCol, int iRow) {
+		return ((iRow / iSqrtSize) * iSqrtSize) + (iCol / iSqrtSize);
+	}
+	
+	public void FillDiagonalRegions() {
+
+		for(int diagReg = 0; diagReg + 1 < iSize + 1; diagReg+= iSqrtSize + 1) {
+
+			SetRegion(diagReg);
+			ShuffleRegion(diagReg);
+		}
+		
+
+	}
+
 }
