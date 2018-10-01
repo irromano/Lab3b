@@ -178,37 +178,44 @@ public class SudokuTest {
 
 		int[][] puzzle = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
 		int[][] expectedPuzzle = { { 0, 0, 1, 2 }, { 0, 0, 3, 4 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
-		//
-		// 1 2 3 4
-		// 3 4 1 2
-		// 2 1 4 3
-		// 4 3 2 1
-		//
-		// region at 0,2 = 2 1 4 3
 
-		// int[] region;
 
 		try {
-			// Method SetRegion = Sudoku.SetRegion(1).getDeclaredMethod(void);
-			// SetRegion.setAccessible(true);
-			// SetRegion.invoke(1); //prints "Method3"
+			// This method tests the set region
 
 			Sudoku s1 = new Sudoku(puzzle);
 			Sudoku s2 = new Sudoku(expectedPuzzle);
 			s1.SetRegion(1);
 			
-/*			  System.out.println(Arrays.toString(s1.getRow(0)));
-			  System.out.println(Arrays.toString(s1.getRow(1)));
-			  System.out.println(Arrays.toString(s1.getRow(2)));
-			  System.out.println(Arrays.toString(s1.getRow(3))); 
-			  System.out.print("\n");
-			  System.out.println(Arrays.toString(s2.getRow(0)));
-			  System.out.println(Arrays.toString(s2.getRow(1)));
-			  System.out.println(Arrays.toString(s2.getRow(2)));
-			  System.out.println(Arrays.toString(s2.getRow(3)));*/
 			 
 			assertTrue(Arrays.equals(s2.getRow(0), s1.getRow(0)));
 			assertTrue(Arrays.equals(s2.getRow(1), s1.getRow(1)));
+			assertTrue(Arrays.equals(s2.getRow(2), s1.getRow(2)));
+			assertTrue(Arrays.equals(s2.getRow(3), s1.getRow(3)));
+		} catch (Exception e) {
+			// Auto-generated catch block
+			fail("Test failed to build a Sudoku");
+			// System.out.println("Test failed to build a Sudoku");
+		}
+
+	}
+	@Test
+	public void setRegion_Test2() {
+
+		int[][] puzzle = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+		int[][] expectedPuzzle = { { 0, 0, 1, 2 }, { 0, 0, 3, 4 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+
+
+		try {
+			// This method tests false for the wrong set region
+
+			Sudoku s1 = new Sudoku(puzzle);
+			Sudoku s2 = new Sudoku(expectedPuzzle);
+			s1.SetRegion(0);
+			
+			 
+			assertFalse(Arrays.equals(s2.getRow(0), s1.getRow(0)));
+			assertFalse(Arrays.equals(s2.getRow(1), s1.getRow(1)));
 			assertTrue(Arrays.equals(s2.getRow(2), s1.getRow(2)));
 			assertTrue(Arrays.equals(s2.getRow(3), s1.getRow(3)));
 		} catch (Exception e) {
@@ -264,13 +271,16 @@ public class SudokuTest {
 
 	}
 
-	/*@Test
+	@Test
 	public void ShuffleArray_Test1() {
 		// This tests that SuffleArray returns same values 1000 times
 
 
 
 		try {
+
+			Method privateStringMethod = Sudoku.class.getDeclaredMethod("ShuffleArray", int[].class);
+			privateStringMethod.setAccessible(true);
 			
 			for (int tst=0; tst< 1000; tst++ ) {
 				int[] array1 = { 1, 2, 3, 4, 5, 6, 7, 8 ,9};
@@ -289,13 +299,11 @@ public class SudokuTest {
 			//System.out.println("Test failed to build a Sudoku");
 		}
 
-	}*/
+	}
 	@Test
 	public void FillDiagonalRegions_Test1() {
+		// This test only prints out a puzzle, it doesn't test because the numbers are random
 		 int[][] puzzle = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
-		 
-
-
 
 		try {
 
@@ -303,8 +311,8 @@ public class SudokuTest {
 
 			Sudoku s1 = new Sudoku(puzzle);
 			s1.FillDiagonalRegions();
-			for (int i=0;i < s1.getRow(0).length; i++)
-				System.out.println(Arrays.toString(s1.getRow(i)));
+			//for (int i=0;i < s1.getRow(0).length; i++)	//uncomment for print test
+				//System.out.println(Arrays.toString(s1.getRow(i)));
 
 			assertTrue(true);
 			// assertTrue(Arrays.equals(s2.getRow(1), s1.getRow(1)));
