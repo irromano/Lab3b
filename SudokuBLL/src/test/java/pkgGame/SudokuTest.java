@@ -302,8 +302,9 @@ public class SudokuTest {
 	}
 	@Test
 	public void FillDiagonalRegions_Test1() {
-		// This test only prints out a puzzle, it doesn't test because the numbers are random
-		 int[][] puzzle = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
+		// This test only prints out a puzzle, and only prints if you uncomment the print line
+		//it doesn't test because the numbers are random
+		 int[][] puzzle = { { 0, 0, 0, 0, 0, 0, 0,0 ,0 },{ 0, 0, 0, 0, 0, 0, 0,0 ,0 }, { 0, 0, 0, 0, 0, 0, 0,0 ,0 }, { 0, 0, 0, 0, 0, 0, 0,0 ,0 }, { 0, 0, 0, 0, 0, 0, 0,0 ,0 }, { 0, 0, 0, 0, 0, 0, 0,0 ,0 }, { 0, 0, 0, 0, 0, 0, 0,0 ,0 }, { 0, 0, 0, 0, 0, 0, 0,0 ,0 }, { 0, 0, 0, 0, 0, 0, 0,0 ,0 } };
 
 		try {
 
@@ -311,13 +312,11 @@ public class SudokuTest {
 
 			Sudoku s1 = new Sudoku(puzzle);
 			s1.FillDiagonalRegions();
-			//for (int i=0;i < s1.getRow(0).length; i++)	//uncomment for print test
-				//System.out.println(Arrays.toString(s1.getRow(i)));
+			//s1.PrintPuzzle(); //Uncomment to reveal print of puzzle
+
 
 			assertTrue(true);
-			// assertTrue(Arrays.equals(s2.getRow(1), s1.getRow(1)));
-			// assertTrue(Arrays.equals(s2.getRow(2), s1.getRow(2)));
-			// assertTrue(Arrays.equals(s2.getRow(3), s1.getRow(3)));
+
 		} catch (Exception e) {
 			// Auto-generated catch block
 			fail("Test failed to build a Sudoku");

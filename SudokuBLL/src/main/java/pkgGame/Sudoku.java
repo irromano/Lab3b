@@ -1,9 +1,7 @@
 package pkgGame; // new Sudoku update  
 
 import pkgEnum.ePuzzleViolation;
-import java.util.*;
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.security.SecureRandom;
 
 import pkgHelper.LatinSquare;
